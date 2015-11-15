@@ -1,5 +1,8 @@
 package br.com.command.command;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -9,13 +12,20 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import br.com.command.comandos.Status;
+import br.com.command.comandos.TvOnCommand;
+import br.com.command.modelos.TV;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         /*
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -27,6 +37,30 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         */
+
+        final ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+        Status.getInstance().setIsConnected(networkInfo != null && networkInfo.isConnected());
+
+        connMgr.addDefaultNetworkActiveListener(new ConnectivityManager.OnNetworkActiveListener() {
+            @Override
+            public void onNetworkActive() {
+                Status.getInstance().setIsConnected(true);
+            }
+        });
+
+    }
+
+    public void onCanalUm(View view){
+
+        TV tv = new TV();
+
+        TvOnCommand comand = new TvOnCommand(tv);
+        comand.execute();
+
     }
 
     @Override

@@ -10,8 +10,13 @@ public class TV {
 
     Status s = Status.getInstance();
 
+    public void canalUm() {
+        s.addMensagem("Chamou o canal ul");
+    }
+
     public void on(){
         s.addMensagem("TV ligada");
+        s.chamarServico("TV ligada", "Mensagem vinda do Daniel");
     }
 
     public void off(){

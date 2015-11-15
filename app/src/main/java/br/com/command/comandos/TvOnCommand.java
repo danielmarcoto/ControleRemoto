@@ -20,6 +20,7 @@ public class TvOnCommand implements Command {
         tv.on();
         tv.setCanal(5);
         tv.setVolume(9);
+        tv.canalUm();
     }
 
     @Override
