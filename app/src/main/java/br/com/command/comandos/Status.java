@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.command.command.HttpRequestTask;
+import br.com.command.modelos.Portao;
 
 /**
  * Created by Guilherme on 05/11/2015.
@@ -25,7 +26,9 @@ public class Status {
 
     public static Status getInstance() {
         if (instance == null)
+        {
             instance = new Status();
+        }
 
         return instance;
     }

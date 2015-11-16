@@ -34,6 +34,7 @@
                 android:id="@+id/tgbPortaoPrincipal"
                 android:checked="false"
                 android:textOff="Fechado"
+                android:onClick="acionarPortaoPrincipal"
                 android:textOn="Aberto" />
         </TableRow>
 
