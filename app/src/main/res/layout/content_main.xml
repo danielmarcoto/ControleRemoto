@@ -11,113 +11,119 @@
 
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="false"
+        android:id="@+id/tableLayout"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="false">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:baselineAligned="false">
 
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="1"
-                android:id="@+id/btnNumero1"
-                android:onClick="onCanalUm" />
+                android:text="Portas e portões"
+                android:onClick="controleDePortas"
+                android:id="@+id/ibtnPortasPortoes"
+                android:layout_column="0"
+                android:longClickable="false"
+                android:nestedScrollingEnabled="false"
+                android:src="@drawable/icon_door_72px_image"
+                android:background="@null" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button2" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button3" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button4" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button5" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button6" />
+                android:src="@drawable/icon_lightbulb_72px_image"
+                android:id="@+id/ibtnLuzes"
+                android:layout_column="0"
+                android:text="Luzes"
+                android:onClick="controleDeLuzes"
+                android:textAlignment="textEnd"
+                android:background="@null"
+                android:layout_gravity="bottom|center" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button7" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button8" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button9" />
+                android:text="Imagem e som"
+                android:id="@+id/ibtnImagemSom"
+                android:onClick="controleDeImagemSom"
+                android:layout_column="0"
+                android:layout_below="@+id/tableLayout"
+                android:layout_alignParentStart="true"
+                android:src="@drawable/icon_tv_72px_image"
+                android:background="@null" />
         </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button10" />
+                android:text="Ar condicionado"
+                android:id="@+id/ibtnArCondicionado"
+                android:onClick="controleDeArCondicionado"
+                android:layout_column="0"
+                android:layout_below="@+id/tableLayout"
+                android:layout_alignParentStart="true"
+                android:background="@null"
+                android:src="@drawable/icon_snow_72px_image" />
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button11" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="New Button"
-                android:id="@+id/button12"
-                android:layout_column="2" />
         </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></TableRow>
 
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Aquecedores"
+                android:id="@+id/ibtnAquecedores"
+                android:onClick="controleDeAquecedores"
+                android:layout_column="0"
+                android:layout_below="@+id/tableLayout"
+                android:layout_alignParentStart="true"
+                android:background="@null"
+                android:src="@drawable/icon_heater_72px_image" />
         </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Persianas"
+                android:id="@+id/ibtnPersianas"
+                android:onClick="controleDePersianas"
+                android:layout_column="0"
+                android:layout_below="@+id/tableLayout"
+                android:layout_alignStart="@+id/tableLayout"
+                android:background="@null"
+                android:src="@drawable/icon_window_72px_image" />
+        </TableRow>
+
     </TableLayout>
+
 </RelativeLayout>

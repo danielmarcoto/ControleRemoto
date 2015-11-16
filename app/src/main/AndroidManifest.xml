@@ -21,6 +21,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".LuzesActivity"
+            android:label="@string/title_activity_luzes"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".PortasPortoesActivity"
+            android:label="@string/title_activity_portas_portoes"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ImagemSomActivity"
+            android:label="@string/title_activity_imagem_som"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".PersianasActivity"
+            android:label="@string/title_activity_persianas"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".AquecedoresActivity"
+            android:label="@string/title_activity_aquecedores"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
+        <activity
+            android:name=".ArCondicionadoActivity"
+            android:label="@string/title_activity_ar_condicionado"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

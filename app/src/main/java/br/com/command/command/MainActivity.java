@@ -1,8 +1,6 @@
 package br.com.command.command;
 
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -12,76 +10,45 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import br.com.command.comandos.Status;
-import br.com.command.comandos.TvOnCommand;
-import br.com.command.modelos.TV;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
         setSupportActionBar(toolbar);
-        /*
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-        */
 
-        final ConnectivityManager connMgr = (ConnectivityManager)
-                getSystemService(Context.CONNECTIVITY_SERVICE);
-
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-
-        Status.getInstance().setIsConnected(networkInfo != null && networkInfo.isConnected());
-
-        connMgr.addDefaultNetworkActiveListener(new ConnectivityManager.OnNetworkActiveListener() {
-            @Override
-            public void onNetworkActive() {
-                Status.getInstance().setIsConnected(true);
-            }
-        });
 
     }
 
-    public void onCanalUm(View view){
-
-        TV tv = new TV();
-
-        TvOnCommand comand = new TvOnCommand(tv);
-        comand.execute();
-
+    public void controleDeLuzes(View v) {
+        Intent it = new Intent(this, LuzesActivity.class);
+        startActivity(it);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void controleDePortas(View v) {
+        Intent it = new Intent(this, PortasPortoesActivity.class);
+        startActivity(it);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    public void controleDeImagemSom(View v) {
+        Intent it = new Intent(this, ImagemSomActivity.class);
+        startActivity(it);
+    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+    public void controleDePersianas(View v) {
+        Intent it = new Intent(this, PersianasActivity.class);
+        startActivity(it);
+    }
 
-        return super.onOptionsItemSelected(item);
+    public void controleDeAquecedores(View v) {
+        Intent it = new Intent(this, AquecedoresActivity.class);
+        startActivity(it);
+    }
+
+    public void controleDeArCondicionado(View view) {
+        Intent it = new Intent(this, ArCondicionadoActivity.class);
+        startActivity(it);
     }
 }

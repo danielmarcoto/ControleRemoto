@@ -11,7 +11,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-/**
+/*
  * Created by danielmarcoto on 14/11/15.
  */
 public class HttpRequestTask extends AsyncTask<String, Integer, String> {
