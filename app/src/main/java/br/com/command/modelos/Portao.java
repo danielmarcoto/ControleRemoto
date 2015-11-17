@@ -1,19 +1,18 @@
 package br.com.command.modelos;
 
-import android.util.Log;
-
-import br.com.command.comandos.Status;
+import br.com.command.util.ExternalService;
 
 /**
  * Created by danielmarcoto on 16/11/15.
  */
 public class Portao {
 
-    private boolean estado;
-    private Status s = Status.getInstance();
-    private static Portao instance = null;
+    private boolean aberto;
+    private ExternalService s;
+    private static Portao instance;
 
     private Portao(){
+        s = ExternalService.getInstance();
     }
 
     public static Portao getInstante(){
@@ -23,21 +22,17 @@ public class Portao {
         return instance;
     }
 
-    public boolean isEstado() {
-        return estado;
+    public boolean isAberto() {
+        return aberto;
     }
 
     public void abrir(){
         s.chamarServico("Abrir Portão", "Abrir o portão da garagem");
-        estado = true;
-
-        Log.i("Log", "Botão acionado on");
+        aberto = true;
     }
 
     public void fechar(){
         s.chamarServico("Fechar Portão", "Fechar o portão da garagem");
-        estado = false;
-
-        Log.i("Log", "Botão acionado off");
+        aberto = false;
     }
 }

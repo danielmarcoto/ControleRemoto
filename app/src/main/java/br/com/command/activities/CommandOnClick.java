@@ -1,6 +1,5 @@
-package br.com.command.command;
+package br.com.command.activities;
 
-import android.content.DialogInterface;
 import android.view.View;
 
 import br.com.command.interfaces.Command;

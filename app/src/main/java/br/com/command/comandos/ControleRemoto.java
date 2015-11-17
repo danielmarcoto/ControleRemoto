@@ -43,10 +43,10 @@ public class ControleRemoto {
         offCommands[slot].execute();
         undoCommand = offCommands[slot];
     }
-
+    /*
     public void undoButtonWasPushed() {
         undoCommand.undo();
-    }
+    }*/
 
     public Command getCommand(int slot) {
         return onCommands[slot];

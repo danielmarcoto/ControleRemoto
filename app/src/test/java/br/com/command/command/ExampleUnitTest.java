@@ -1,4 +1,4 @@
-package br.com.command.command;
+package br.com.command.activities;
 
 import org.junit.Test;
 
