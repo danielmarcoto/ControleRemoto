@@ -33,9 +33,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tgbPortaoPrincipal"
                 android:checked="false"
-                android:textOff="Fechado"
                 android:onClick="acionarPortaoPrincipal"
-                android:textOn="Aberto" />
+                android:background="@drawable/ic_toggle_bg"
+                style="@style/toggleButton" />
         </TableRow>
 
         <TableRow
@@ -54,8 +54,8 @@
                 android:layout_height="wrap_content"
                 android:text="New ToggleButton"
                 android:id="@+id/tgbPortaPrincipal"
-                android:textOff="Fechado"
-                android:textOn="Aberto" />
+                android:background="@drawable/ic_toggle_bg"
+                style="@style/toggleButton" />
         </TableRow>
 
         <TableRow
@@ -72,9 +72,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tgbGaragem"
-                android:textOff="Fechado"
-                android:textOn="Aberto"
-                android:singleLine="true" />
+                android:singleLine="true"
+                android:background="@drawable/ic_toggle_bg"
+                style="@style/toggleButton" />
         </TableRow>
 
     </TableLayout>
