@@ -5,19 +5,19 @@ import br.com.command.util.ExternalService;
 /**
  * Created by danielmarcoto on 17/11/15.
  */
-public class SomSalaEstar {
-    private static SomSalaEstar instance;
+public class ArCondicionadoSuite {
+    private static ArCondicionadoSuite instance;
     private ExternalService externalService;
 
     private boolean ligado;
 
-    private SomSalaEstar(){
+    private ArCondicionadoSuite(){
         externalService = ExternalService.getInstance();
     }
 
-    public static SomSalaEstar getInstance(){
+    public static ArCondicionadoSuite getInstance(){
         if (instance == null)
-            instance = new SomSalaEstar();
+            instance = new ArCondicionadoSuite();
         return instance;
     }
 
@@ -26,14 +26,14 @@ public class SomSalaEstar {
     }
 
     public void ligar(){
-        externalService.chamarServico("Ligar som sala de estar",
-                "O micro system da sala de estar será ligado");
+        externalService.chamarServico("Ligar Ar-condicionado suíte",
+                "O ar-condicionado da suíte será ligado");
         ligado = true;
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar som sala de estar",
-                "O micro system da sala de estar será desligado");
+        externalService.chamarServico("Desligar Ar-condicionado corredor",
+                "O ar-condicionado da suíte será desligado");
         ligado = false;
     }
 }
