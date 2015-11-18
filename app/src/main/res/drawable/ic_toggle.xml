@@ -1,0 +1,8 @@
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:state_checked="false"
+        android:drawable="@drawable/icon_button_power_on_2_image" />
+    <item
+        android:state_checked="true"
+        android:drawable="@drawable/icon_button_power_off_2_image" />
+</selector>

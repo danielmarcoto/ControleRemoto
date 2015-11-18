@@ -9,73 +9,86 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/activity_luzes" tools:context="br.com.command.command.LuzesActivity">
 
-    <TableLayout
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1"
+        android:layout_gravity="center|top"
         android:layout_alignParentTop="true"
+        android:id="@+id/scrollView"
         android:layout_centerHorizontal="true"
-        android:id="@+id/tableLayoutLuzes"
-        android:layout_gravity="center|top">
+        android:layout_alignWithParentIfMissing="false">
 
-        <TableRow
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_column="8">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tableLayoutLuzes"
+            android:layout_gravity="center|top">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtLuzDaSalaDeEstar"
-                android:text="Luz da Sala de Estar" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="8">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbLuzDaSalaDeEstar"
-                android:textOff="Apagada"
-                android:textOn="Acesa" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtLuzDaSalaDeEstar"
+                    android:text="Luz da Sala de Estar" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/txtLuzDaSuite">
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/tgbLuzDaSalaDeEstar"
+                    style="@style/toggleButton"
+                    android:background="@drawable/ic_toggle_bg" />
+            </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtLuzSuite"
-                android:text="Luz da suite" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbLuzDaSuite"
-                android:textOff="Apagada"
-                android:textOn="Acesa" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtLuzSuite"
+                    android:text="Luz da suite" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/tgbLuzDaSuite"
+                    style="@style/toggleButton"
+                    android:background="@drawable/ic_toggle_bg" />
+            </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/txtLuzExterna"
-                android:text="Luz externa" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbLuzExterna"
-                android:textOff="Apagada"
-                android:textOn="Acesa" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txtLuzExterna"
+                    android:text="Luz externa" />
 
-    </TableLayout>
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/tgbLuzExterna"
+                    style="@style/toggleButton"
+                    android:background="@drawable/ic_toggle_bg" />
+
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

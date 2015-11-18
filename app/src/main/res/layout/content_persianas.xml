@@ -10,52 +10,59 @@
     tools:showIn="@layout/activity_persianas"
     tools:context="br.com.command.command.PersianasActivity">
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/tgbPersianas"
-        android:layout_gravity="center|top">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Persiana Suite"
-                android:id="@+id/txtPersianaDaSuite" />
-
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbPersianaSuite"
-                android:textOff="Fechada"
-                android:textOn="Aberta" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TableLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_column="0">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/tgbPersianas"
+            android:layout_gravity="center|top">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Persiana Sala de Estar"
-                android:id="@+id/txtPersianaDaSalaDeEstar" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbPersianaSalaDeEstar"
-                android:textOff="Fechada"
-                android:textOn="Aberta" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Persiana Suite"
+                    android:id="@+id/txtPersianaDaSuite" />
 
-    </TableLayout>
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tgbPersianaSuite"
+                    style="@style/toggleButton"
+                    android:background="@drawable/ic_toggle_bg" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="0">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Persiana Sala de Estar"
+                    android:id="@+id/txtPersianaDaSalaDeEstar" />
+
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tgbPersianaSalaDeEstar"
+                    style="@style/toggleButton"
+                    android:background="@drawable/ic_toggle_bg" />
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
 </RelativeLayout>

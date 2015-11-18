@@ -10,72 +10,81 @@
     tools:showIn="@layout/activity_portas_portoes"
     tools:context="br.com.command.command.PortasPortoesActivity">
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center|top"
-        android:id="@+id/TableLayoutPortasPortoes">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:scrollbars="none"
+        android:layout_weight="1">
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Portão principal"
-                android:id="@+id/textView" />
-
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tgbPortaoPrincipal"
-                android:checked="false"
-                android:textOff="Fechado"
-                android:onClick="acionarPortaoPrincipal"
-                android:textOn="Aberto" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
+        <TableLayout
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_column="0">
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center|top"
+            android:id="@+id/TableLayoutPortasPortoes">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Porta principal"
-                android:id="@+id/textView2" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="New ToggleButton"
-                android:id="@+id/tgbPortaPrincipal"
-                android:textOff="Fechado"
-                android:textOn="Aberto" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Portão principal"
+                    android:id="@+id/textView" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tgbPortaoPrincipal"
+                    android:checked="false"
+                    android:onClick="acionarPortaoPrincipal"
+                    android:background="@drawable/ic_toggle_bg"
+                    style="@style/toggleButton" />
+            </TableRow>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Garagem"
-                android:id="@+id/textView3" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_column="0">
 
-            <ToggleButton
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tgbGaragem"
-                android:textOff="Fechado"
-                android:textOn="Aberto"
-                android:singleLine="true" />
-        </TableRow>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Porta principal"
+                    android:id="@+id/textView2" />
 
-    </TableLayout>
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:text="New ToggleButton"
+                    android:id="@+id/tgbPortaPrincipal"
+                    android:background="@drawable/ic_toggle_bg"
+                    style="@style/toggleButton" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Garagem"
+                    android:id="@+id/textView3" />
+
+                <ToggleButton
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tgbGaragem"
+                    android:singleLine="true"
+                    android:background="@drawable/ic_toggle_bg"
+                    style="@style/toggleButton" />
+            </TableRow>
+
+        </TableLayout>
+
+    </ScrollView>
+
 </RelativeLayout>
