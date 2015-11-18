@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="br.com.command.command" >
+    package="br.com.command.activities" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="br.com.command.activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
@@ -22,32 +22,32 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LuzesActivity"
+            android:name="br.com.command.activities.LuzesActivity"
             android:label="@string/title_activity_luzes"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".PortasPortoesActivity"
+            android:name="br.com.command.activities.PortasPortoesActivity"
             android:label="@string/title_activity_portas_portoes"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".ImagemSomActivity"
+            android:name="br.com.command.activities.ImagemSomActivity"
             android:label="@string/title_activity_imagem_som"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".PersianasActivity"
+            android:name="br.com.command.activities.PersianasActivity"
             android:label="@string/title_activity_persianas"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".AquecedoresActivity"
+            android:name="br.com.command.activities.AquecedoresActivity"
             android:label="@string/title_activity_aquecedores"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
-            android:name=".ArCondicionadoActivity"
+            android:name="br.com.command.activities.ArCondicionadoActivity"
             android:label="@string/title_activity_ar_condicionado"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
