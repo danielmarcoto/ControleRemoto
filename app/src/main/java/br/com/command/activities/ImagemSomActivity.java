@@ -126,10 +126,10 @@ public class ImagemSomActivity extends AppCompatActivity {
         toggleSomSalaEstar.setChecked(statusController.isSomSalaEstar());
         toggleTvSalaEstar.setChecked(statusController.isTvSalaEstar());
 
-        toggleSomSuite.setOnClickListener(new CommandOnClick(SomCozinha.ID, controleRemoto));
-        toggleSomCozinha.setOnClickListener(new CommandOnClick(SomPiscina.ID, controleRemoto));
-        toggleSomPiscina.setOnClickListener(new CommandOnClick(SomSalaEstar.ID, controleRemoto));
-        toggleSomSalaEstar.setOnClickListener(new CommandOnClick(SomSuite.ID, controleRemoto));
+        toggleSomSuite.setOnClickListener(new CommandOnClick(SomSuite.ID, controleRemoto));
+        toggleSomCozinha.setOnClickListener(new CommandOnClick(SomCozinha.ID, controleRemoto));
+        toggleSomPiscina.setOnClickListener(new CommandOnClick(SomPiscina.ID, controleRemoto));
+        toggleSomSalaEstar.setOnClickListener(new CommandOnClick(SomSalaEstar.ID, controleRemoto));
         toggleTvSalaEstar.setOnClickListener(new CommandOnClick(TvSalaEstar.ID, controleRemoto));
 
     }
