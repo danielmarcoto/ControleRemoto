@@ -18,7 +18,7 @@ public class MacroCommand implements Command {
     @Override
     public void execute() {
         for (int i = 0; i < commands.length; i++) {
-            commands[i].execute();
+            //commands[i].execute();
         }
     }
 }

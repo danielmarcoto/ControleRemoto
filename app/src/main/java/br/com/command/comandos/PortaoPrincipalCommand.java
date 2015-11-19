@@ -15,12 +15,16 @@ public class PortaoPrincipalCommand implements Command {
     }
 
     @Override
-    public void execute() {
+    public void execute()  {
         if(portao.isAberto()){
             portao.fechar();
 
         } else{
-            portao.abrir();
+            try {
+                portao.abrir();
+            } catch (Exception ec){
+                ec.printStackTrace();
+            }
         }
     }
 }

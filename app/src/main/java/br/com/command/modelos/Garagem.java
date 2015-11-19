@@ -1,25 +1,36 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class Garagem {
-    private static Garagem instance;
+    //private static Garagem instance;
     private ExternalService externalService;
+    //private StatusController statusController;
+    /*
+    public OnStatusChangeListener getOnStatusChangeListener() {
+        return onStatusChangeListener;
+    }*/
 
-    private boolean aberta;
-
-    private Garagem() {
-        externalService = ExternalService.getInstance();
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
-    public static Garagem getInstance(){
-        if (instance == null)
-            instance = new Garagem();
+    private OnStatusChangeListener onStatusChangeListener;
 
-        return instance;
+    public final static int ID = 1;
+
+    private boolean aberta = false;
+
+    public Garagem(ExternalService externalService) {
+        this.externalService = externalService;
+        //statusController = StatusController.getInstance();
     }
 
     public boolean isAberta() {
@@ -27,13 +38,61 @@ public class Garagem {
     }
 
     public void abrir(){
-        externalService.chamarServico("Abrir a garagem", "A garagem será aberta");
-        aberta = true;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Abrir a garagem", "A garagem será aberta");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    aberta = false;
+                } else {
+                    aberta = true;
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(aberta);
+            }
+        }.execute();
     }
 
     public void fechar(){
-        externalService.chamarServico("Fechar a garagem", "A garagem será fechada");
-        aberta = false;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Fechar a garagem", "A garagem será fechada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    aberta = true;
+                } else {
+                    aberta = false;
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(aberta);
+            }
+        }.execute();
     }
 
 }

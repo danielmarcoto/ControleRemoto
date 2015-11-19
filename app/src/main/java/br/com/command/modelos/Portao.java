@@ -1,5 +1,8 @@
 package br.com.command.modelos;
 
+import android.util.Log;
+
+import br.com.command.interfaces.ServiceStatus;
 import br.com.command.util.ExternalService;
 
 /**
@@ -8,15 +11,16 @@ import br.com.command.util.ExternalService;
 public class Portao {
 
     private boolean aberto;
-    private ExternalService s;
+    private boolean erro;
+    private ExternalService externalService;
     private static Portao instance;
 
-    private Portao(){
-        s = ExternalService.getInstance();
+    private Portao() {
+        externalService = ExternalService.getInstance();
     }
 
-    public static Portao getInstante(){
-        if (instance == null){
+    public static Portao getInstance() {
+        if (instance == null) {
             instance = new Portao();
         }
         return instance;
@@ -26,13 +30,43 @@ public class Portao {
         return aberto;
     }
 
-    public void abrir(){
-        s.chamarServico("Abrir Portão", "Abrir o portão da garagem");
-        aberto = true;
+    public void abrir() throws Exception {
+        try {
+            externalService.chamarServico(
+                    "Abrir Portão",
+                    "Abrir o portão da garagem",
+                    new ServiceStatus() {
+                        @Override
+                        public void callbackIfSuccess() {
+                            aberto = true;
+                        }
+
+                        @Override
+                        public void callbackIfFail() {
+                            aberto = false;
+                            Log.i("Teste", "Estou no callbackIfFail");
+                        }
+                    });
+        } catch (Throwable e) {
+            throw new Exception("Erro");
+        }
+
     }
 
-    public void fechar(){
-        s.chamarServico("Fechar Portão", "Fechar o portão da garagem");
-        aberto = false;
+    public void fechar() {
+        externalService.chamarServico(
+                "Fechar Portão",
+                "Fechar o portão da garagem",
+                new ServiceStatus() {
+                    @Override
+                    public void callbackIfSuccess() {
+                        aberto = false;
+                    }
+
+                    @Override
+                    public void callbackIfFail() {
+                        aberto = true;
+                    }
+                });
     }
 }
