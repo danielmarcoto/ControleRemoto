@@ -1,0 +1,19 @@
+package br.com.command.comandos;
+
+import br.com.command.interfaces.Command;
+import br.com.command.modelos.ArCondicionadoSuite;
+
+/**
+ * Created by danielmarcoto on 17/11/15.
+ */
+public class ArCondicionadoSuiteLigarCommand implements Command {
+
+    private ArCondicionadoSuite arCondicionado;
+
+    public ArCondicionadoSuiteLigarCommand(ArCondicionadoSuite arCondicionado) {
+        this.arCondicionado = arCondicionado;
+    }
+
+    @Override
+    public void execute() {arCondicionado.ligar();}
+}

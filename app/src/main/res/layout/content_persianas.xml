@@ -54,11 +54,12 @@
                     android:id="@+id/txtPersianaDaSalaDeEstar" />
 
                 <ToggleButton
-                    android:layout_width="fill_parent"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/tgbPersianaSalaDeEstar"
                     style="@style/toggleButton"
-                    android:background="@drawable/ic_toggle_bg" />
+                    android:background="@drawable/ic_toggle_bg"
+                    android:elegantTextHeight="false" />
             </TableRow>
 
         </TableLayout>
