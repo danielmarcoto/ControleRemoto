@@ -43,13 +43,13 @@ public class PersianaSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(false);
+                    statusController.setPersianaSalaEstarAberta(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setPersianaSalaEstarAberta(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isPersianaSalaEstarAberta());
             }
         }.execute();
     }
@@ -72,13 +72,13 @@ public class PersianaSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(true);
+                    statusController.setPersianaSalaEstarAberta(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setPersianaSalaEstarAberta(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isPersianaSalaEstarAberta());
             }
         }.execute();
     }

@@ -43,13 +43,13 @@ public class TvSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setTvSalaEstar(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setTvSalaEstar(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isTvSalaEstar());
             }
         }.execute();
     }
@@ -73,13 +73,13 @@ public class TvSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setTvSalaEstar(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setTvSalaEstar(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isTvSalaEstar());
             }
         }.execute();
     }

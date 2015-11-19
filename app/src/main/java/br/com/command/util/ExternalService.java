@@ -59,7 +59,11 @@ public class ExternalService {
         // Incorreto
         //String urlStr = "http://100.4.192.169/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
 
-        String urlStr = "http://192.168.0.128/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
+       // String urlStr = "http://192.168.0.128/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
+      //  String urlStr = "http://localhost:8080/ws/services/control/?C=" + strings[0] + "&M=" + strings[1];
+        String urlStr = "http://192.168.0.130:8080/ws/services/control?C=" + strings[0] + "&M=" + strings[1];
+
+
 
         Log.i("Log", urlStr);
 

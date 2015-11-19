@@ -43,13 +43,13 @@ public class ArCondicionadoSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(false);
+                    statusController.setArCondicionadoSalaEstarLigado(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setArCondicionadoSalaEstarLigado(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isArCondicionadoSalaEstarLigado());
             }
         }.execute();
     }
@@ -73,13 +73,13 @@ public class ArCondicionadoSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(true);
+                    statusController.setArCondicionadoSalaEstarLigado(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setArCondicionadoSalaEstarLigado(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isArCondicionadoSalaEstarLigado());
             }
         }.execute();
     }

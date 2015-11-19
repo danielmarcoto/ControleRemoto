@@ -43,13 +43,13 @@ public class ArCondicionadoSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(false);
+                    statusController.setArCondicionadoSuiteLigado(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setArCondicionadoSuiteLigado(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isArCondicionadoSuiteLigado());
             }
         }.execute();
     }
@@ -73,13 +73,13 @@ public class ArCondicionadoSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(true);
+                    statusController.setArCondicionadoSuiteLigado(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setArCondicionadoSuiteLigado(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isArCondicionadoSuiteLigado());
             }
         }.execute();
     }

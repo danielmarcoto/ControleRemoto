@@ -43,13 +43,13 @@ public class PersianaSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(false);
+                    statusController.setPersianaSuiteAberta(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setPersianaSuiteAberta(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isPersianaSuiteAberta());
             }
         }.execute();
 
@@ -70,13 +70,13 @@ public class PersianaSuite {
                 super.onPostExecute(response);
 
                 if (response.startsWith("Erro")) {
-                    statusController.setGaragemAberta(true);
+                    statusController.setPersianaSuiteAberta(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setPersianaSuiteAberta(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isPersianaSuiteAberta());
             }
         }.execute();
     }

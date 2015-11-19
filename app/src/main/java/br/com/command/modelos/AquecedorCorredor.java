@@ -44,13 +44,13 @@ public class AquecedorCorredor {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorCorredorLigado(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorCorredorLigado(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorCorredorLigado());
             }
         }.execute();
     }
@@ -74,13 +74,13 @@ public class AquecedorCorredor {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorCorredorLigado(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorCorredorLigado(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorCorredorLigado());
             }
         }.execute();
     }

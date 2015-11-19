@@ -44,13 +44,13 @@ public class AquecedorSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorSalaEstarLigado(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorSalaEstarLigado(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorSalaEstarLigado());
             }
         }.execute();
     }
@@ -74,13 +74,13 @@ public class AquecedorSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorSalaEstarLigado(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorSalaEstarLigado(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorSalaEstarLigado());
             }
         }.execute();
     }

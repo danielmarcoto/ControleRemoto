@@ -44,13 +44,13 @@ public class AquecedorSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorSuiteLigado(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorSuiteLigado(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorSuiteLigado());
             }
         }.execute();
     }
@@ -74,13 +74,13 @@ public class AquecedorSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setAquecedorSuiteLigado(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setAquecedorSuiteLigado(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isAquecedorSuiteLigado());
             }
         }.execute();
     }

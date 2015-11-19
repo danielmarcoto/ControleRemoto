@@ -43,13 +43,13 @@ public class SomSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomSuite(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomSuite(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomSuite());
             }
         }.execute();
     }
@@ -73,13 +73,13 @@ public class SomSuite {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomSuite(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomSuite(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomSuite());
             }
         }.execute();
     }

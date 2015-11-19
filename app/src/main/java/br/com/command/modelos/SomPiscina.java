@@ -42,13 +42,13 @@ public class SomPiscina {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomPiscina(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomPiscina(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomPiscina());
             }
         }.execute();
     }
@@ -72,13 +72,13 @@ public class SomPiscina {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomPiscina(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomPiscina(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomPiscina());
             }
         }.execute();
     }

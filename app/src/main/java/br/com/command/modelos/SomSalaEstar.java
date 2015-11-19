@@ -43,13 +43,13 @@ public class SomSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomSalaEstar(false);
                 } else {
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomSalaEstar(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomSalaEstar());
             }
         }.execute();
     }
@@ -73,13 +73,13 @@ public class SomSalaEstar {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    statusController.setGaragemAberta(true);
+                    statusController.setSomSalaEstar(true);
                 } else {
-                    statusController.setGaragemAberta(false);
+                    statusController.setSomSalaEstar(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+                    onStatusChangeListener.onChange(statusController.isSomSalaEstar());
             }
         }.execute();
     }
