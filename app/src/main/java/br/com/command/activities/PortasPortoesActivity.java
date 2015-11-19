@@ -3,6 +3,7 @@ package br.com.command.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import br.com.command.comandos.ControleRemoto;
@@ -42,6 +43,12 @@ public class PortasPortoesActivity extends AppCompatActivity {
         portao.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (togglePortaoPrincipal.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
+
                 togglePortaoPrincipal.setChecked(newStatus);
             }
         });
@@ -50,6 +57,12 @@ public class PortasPortoesActivity extends AppCompatActivity {
         porta.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (togglePortaPrincipal.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
+
                 togglePortaPrincipal.setChecked(newStatus);
             }
         });
@@ -58,6 +71,12 @@ public class PortasPortoesActivity extends AppCompatActivity {
         garagem.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleGaragem.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
+
                 toggleGaragem.setChecked(newStatus);
             }
         });

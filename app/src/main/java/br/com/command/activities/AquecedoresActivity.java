@@ -3,6 +3,7 @@ package br.com.command.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import br.com.command.comandos.AquecedorCorredorDesligarCommand;
@@ -51,6 +52,11 @@ public class AquecedoresActivity extends AppCompatActivity {
         aquecedorCorredor.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleAquecedorCorredor.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleAquecedorCorredor.setChecked(newStatus);
             }
         });
@@ -59,6 +65,11 @@ public class AquecedoresActivity extends AppCompatActivity {
         aquecedorSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleAquecedorSalaEstar.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleAquecedorSalaEstar.setChecked(newStatus);
             }
         });
@@ -67,6 +78,11 @@ public class AquecedoresActivity extends AppCompatActivity {
         aquecedorSuite.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleAquecedorSuite.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleAquecedorSuite.setChecked(newStatus);
             }
         });

@@ -3,6 +3,7 @@ package br.com.command.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import br.com.command.comandos.ControleRemoto;
@@ -42,12 +43,15 @@ public class PersianasActivity extends AppCompatActivity {
         togglePersianaSalaEstar = (ToggleButton) findViewById(R.id.tgbPersianaSalaDeEstar);
         togglePersianaSuite = (ToggleButton) findViewById(R.id.tgbPersianaSuite);
 
-
-
         PersianaSuite persianaSuite = new PersianaSuite();
         persianaSuite.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (togglePersianaSuite.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 togglePersianaSuite.setChecked(newStatus);
             }
         });
@@ -56,12 +60,14 @@ public class PersianasActivity extends AppCompatActivity {
         persianaSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (togglePersianaSalaEstar.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 togglePersianaSalaEstar.setChecked(newStatus);
             }
         });
-
-
-
 
         Command persianaSalaEstarAbrirCommand = new PersianaSalaEstarAbrirCommand(persianaSalaEstar);
         Command persianaSalaEstarFecharCommand = new PersianaSalaEstarFecharCommand(persianaSalaEstar);

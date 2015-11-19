@@ -49,7 +49,8 @@ public class ArCondicionadoCorredor {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoCorredorLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoCorredorLigado());
             }
         }.execute();
     }
@@ -79,7 +80,8 @@ public class ArCondicionadoCorredor {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoCorredorLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoCorredorLigado());
             }
         }.execute();
     }

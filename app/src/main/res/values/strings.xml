@@ -10,4 +10,5 @@
     <string name="title_activity_persianas">Persianas</string>
     <string name="title_activity_aquecedores">Aquecedor Solar</string>
     <string name="title_activity_ar_condicionado">Ar Condicionado</string>
+    <string name="notificao_se_erro_servidor">O servidor não está disponível</string>
 </resources>

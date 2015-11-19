@@ -3,6 +3,7 @@ package br.com.command.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import br.com.command.comandos.ArCondicionadoCorredorDesligarCommand;
@@ -51,6 +52,11 @@ public class ArCondicionadoActivity extends AppCompatActivity {
         arCondicionadoCorredor.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleArCorredor.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleArCorredor.setChecked(newStatus);
             }
         });
@@ -59,6 +65,11 @@ public class ArCondicionadoActivity extends AppCompatActivity {
         arCondicionadoSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleArSalaEstar.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleArSalaEstar.setChecked(newStatus);
             }
         });
@@ -67,6 +78,11 @@ public class ArCondicionadoActivity extends AppCompatActivity {
         arCondicionadoSuite.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleArSuite.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleArSuite.setChecked(newStatus);
             }
         });

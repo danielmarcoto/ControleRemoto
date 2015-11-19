@@ -49,7 +49,8 @@ public class ArCondicionadoSuite {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoSuiteLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoSuiteLigado());
             }
         }.execute();
     }
@@ -60,7 +61,7 @@ public class ArCondicionadoSuite {
             @Override
             protected String doInBackground(String... strings) {
                 String response = externalService
-                        .callRemote("Desligar Ar-condicionado suit",
+                        .callRemote("Desligar Ar-condicionado suite",
                                 "O ar-condicionado da suite será desligado");
 
                 return response;
@@ -79,7 +80,8 @@ public class ArCondicionadoSuite {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoSuiteLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoSuiteLigado());
             }
         }.execute();
     }

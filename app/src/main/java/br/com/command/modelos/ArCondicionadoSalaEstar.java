@@ -49,7 +49,8 @@ public class ArCondicionadoSalaEstar {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoSalaEstarLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoSalaEstarLigado());
             }
         }.execute();
     }
@@ -79,7 +80,8 @@ public class ArCondicionadoSalaEstar {
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(statusController.isArCondicionadoSalaEstarLigado());
+                    onStatusChangeListener.onChange(
+                            statusController.isArCondicionadoSalaEstarLigado());
             }
         }.execute();
     }

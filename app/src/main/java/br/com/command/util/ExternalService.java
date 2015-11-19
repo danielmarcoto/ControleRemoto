@@ -1,6 +1,5 @@
 package br.com.command.util;
 
-import android.content.Context;
 import android.util.Log;
 
 import java.io.IOException;
@@ -11,8 +10,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import br.com.command.interfaces.ServiceStatus;
 
 /**
  * Created by Guilherme on 05/11/2015.
@@ -59,11 +56,7 @@ public class ExternalService {
         // Incorreto
         //String urlStr = "http://100.4.192.169/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
 
-       // String urlStr = "http://192.168.0.128/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
-      //  String urlStr = "http://localhost:8080/ws/services/control/?C=" + strings[0] + "&M=" + strings[1];
-        String urlStr = "http://192.168.0.130:8080/ws/services/control?C=" + strings[0] + "&M=" + strings[1];
-
-
+        String urlStr = "http://192.168.1.167/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
 
         Log.i("Log", urlStr);
 
@@ -98,53 +91,6 @@ public class ExternalService {
             e.printStackTrace();
             return "Erro: " + strings[0];
         }
-    }
-
-    public void chamarServico(String comando, String mensagem) {
-
-        if (!isConnected) return;
-
-        Log.i("Log", "command:" + comando + " / Message:" + mensagem);
-
-        String comandoParam = null;
-        String mensagemParam = null;
-
-        try {
-            comandoParam = URLEncoder.encode(comando, "utf-8");
-            mensagemParam = URLEncoder.encode(mensagem, "utf-8");
-        }
-        catch (UnsupportedEncodingException ex){
-            ex.printStackTrace();
-        }
-
-        String[] parameters = { comandoParam, mensagemParam };
-
-        HttpRequestTask requestTask = new HttpRequestTask();
-        requestTask.execute(parameters);
-
-    }
-
-    public void chamarServico(String comando, String mensagem, ServiceStatus serviceStatus) {
-
-        if (!isConnected) {
-            serviceStatus.callbackIfFail();
-        }
-
-        Log.i("Log", "command:" + comando + " / Message:" + mensagem);
-
-        String comandoParam = null;
-        String mensagemParam = null;
-
-        try {
-            comandoParam = URLEncoder.encode(comando, "utf-8");
-            mensagemParam = URLEncoder.encode(mensagem, "utf-8");
-        }
-        catch (UnsupportedEncodingException ex){
-            ex.printStackTrace();
-            serviceStatus.callbackIfFail();
-        }
-
-        String[] parameters = { comandoParam, mensagemParam };
     }
 
     public String readIt(InputStream stream, int len) throws IOException {

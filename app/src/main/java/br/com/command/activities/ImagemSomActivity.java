@@ -3,6 +3,7 @@ package br.com.command.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import br.com.command.comandos.ControleRemoto;
@@ -62,6 +63,11 @@ public class ImagemSomActivity extends AppCompatActivity {
         somCozinha.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleSomCozinha.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleSomCozinha.setChecked(newStatus);
             }
         });
@@ -70,6 +76,11 @@ public class ImagemSomActivity extends AppCompatActivity {
         somSuite.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleSomSuite.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleSomSuite.setChecked(newStatus);
             }
         });
@@ -78,6 +89,11 @@ public class ImagemSomActivity extends AppCompatActivity {
         somPiscina.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleSomPiscina.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleSomPiscina.setChecked(newStatus);
             }
         });
@@ -85,6 +101,11 @@ public class ImagemSomActivity extends AppCompatActivity {
         somSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleSomSalaEstar.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleSomSalaEstar.setChecked(newStatus);
             }
         });
@@ -92,6 +113,11 @@ public class ImagemSomActivity extends AppCompatActivity {
         tvSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
             @Override
             public void onChange(boolean newStatus) {
+                if (toggleTvSalaEstar.isChecked() != newStatus){
+                    Toast.makeText(getApplicationContext(),
+                            getString(R.string.notificao_se_erro_servidor),
+                            Toast.LENGTH_LONG).show();
+                }
                 toggleTvSalaEstar.setChecked(newStatus);
             }
         });
