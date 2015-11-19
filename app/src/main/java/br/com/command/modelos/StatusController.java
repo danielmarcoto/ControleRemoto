@@ -27,6 +27,11 @@ public class StatusController {
     private boolean persianaSalaEstarAberta;
     private boolean persianaSuiteAberta;
 
+    private boolean aquecedorCorredorLigado;
+    private boolean aquecedorSalaEstarLigado;
+    private boolean aquecedorSuiteLigado;
+
+
     public boolean isLuzExternaLigada() {
         return luzExternaLigada;
     }
@@ -97,5 +102,29 @@ public class StatusController {
 
     public void setPersianaSuiteAberta(boolean persianaSuiteAberta) {
         this.persianaSuiteAberta = persianaSuiteAberta;
+    }
+
+    public boolean isAquecedorCorredorLigado() {
+        return aquecedorCorredorLigado;
+    }
+
+    public void setAquecedorCorredorLigado(boolean aquecedorCorredorLigado) {
+        this.aquecedorCorredorLigado = aquecedorCorredorLigado;
+    }
+
+    public boolean isAquecedorSalaEstarLigado() {
+        return aquecedorSalaEstarLigado;
+    }
+
+    public void setAquecedorSalaEstarLigado(boolean aquecedorSalaEstarLigado) {
+        this.aquecedorSalaEstarLigado = aquecedorSalaEstarLigado;
+    }
+
+    public boolean isAquecedorSuiteLigado() {
+        return aquecedorSuiteLigado;
+    }
+
+    public void setAquecedorSuiteLigado(boolean aquecedorSuiteLigado) {
+        this.aquecedorSuiteLigado = aquecedorSuiteLigado;
     }
 }

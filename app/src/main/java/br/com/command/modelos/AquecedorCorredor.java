@@ -1,40 +1,87 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class AquecedorCorredor {
 
-    private static AquecedorCorredor instance;
+    public final static int ID = 10;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
+    private StatusController statusController;
 
-    private boolean ligado;
-
-    private AquecedorCorredor(){
-        externalService = ExternalService.getInstance();
+    public AquecedorCorredor(){
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
     }
 
-    public static AquecedorCorredor getInstance(){
-        if (instance == null)
-            instance = new AquecedorCorredor();
-        return instance;
-    }
-
-    public boolean isLigado(){
-        return ligado;
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
     public void ligar(){
-        externalService.chamarServico("Ligar aquecedor corredor",
-                "O aquecedor do corredor será ligado");
-        ligado = true;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar aquecedor corredor",
+                                "O aquecedor do corredor será ligado");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(false);
+                } else {
+                    statusController.setGaragemAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar aquecedor corredor",
-                "O aquecedor do corredor será desligado");
-        ligado = false;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar aquecedor corredor",
+                                "O aquecedor do corredor será desligado");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(true);
+                } else {
+                    statusController.setGaragemAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 }
