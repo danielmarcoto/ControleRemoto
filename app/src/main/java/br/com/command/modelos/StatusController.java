@@ -6,9 +6,10 @@ package br.com.command.modelos;
 public class StatusController {
     private static StatusController instance;
 
-    private StatusController() {}
+    private StatusController() {
+    }
 
-    public static StatusController getInstance(){
+    public static StatusController getInstance() {
         if (instance == null)
             instance = new StatusController();
         return instance;
@@ -22,6 +23,9 @@ public class StatusController {
     private boolean luzExternaLigada;
     private boolean luzSalaEstarLigada;
     private boolean luzSuiteLigada;
+
+    private boolean persianaSalaEstarAberta;
+    private boolean persianaSuiteAberta;
 
     public boolean isLuzExternaLigada() {
         return luzExternaLigada;
@@ -77,5 +81,21 @@ public class StatusController {
 
     public void setPortaTrancada(boolean portaTrancada) {
         this.portaTrancada = portaTrancada;
+    }
+
+    public boolean isPersianaSalaEstarAberta() {
+        return persianaSalaEstarAberta;
+    }
+
+    public void setPersianaSalaEstarAberta(boolean persianaSalaEstarAberta) {
+        this.persianaSalaEstarAberta = persianaSalaEstarAberta;
+    }
+
+    public boolean isPersianaSuiteAberta() {
+        return persianaSuiteAberta;
+    }
+
+    public void setPersianaSuiteAberta(boolean persianaSuiteAberta) {
+        this.persianaSuiteAberta = persianaSuiteAberta;
     }
 }

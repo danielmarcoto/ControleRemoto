@@ -1,40 +1,87 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class PersianaSalaEstar {
 
-    private static PersianaSalaEstar instance;
+    public final static int ID = 8;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
+    private StatusController statusController;
 
-    private boolean aberta;
-
-    private PersianaSalaEstar(){
-        externalService = ExternalService.getInstance();
+    public PersianaSalaEstar() {
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
     }
 
-    public static PersianaSalaEstar getInstance(){
-        if (instance == null)
-            instance = new PersianaSalaEstar();
-        return instance;
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
-    public boolean isAberta(){
-        return aberta;
+    public void abrir() {
+
+        new AsyncTask<String, Integer, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Abrir persiana sala estar", "A persiana da sala de estar será aberta");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")) {
+                    statusController.setGaragemAberta(false);
+                } else {
+                    statusController.setGaragemAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
-    public void fechar(){
-        externalService.chamarServico("Fechar persiana sala estar",
-                "A persiana da sala de estar será fechada");
-        aberta = false;
+    public void fechar() {
+
+        new AsyncTask<String, Integer, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Fechar persiana sala estar", "A persiana da sala de estar será fechada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")) {
+                    statusController.setGaragemAberta(true);
+                } else {
+                    statusController.setGaragemAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
-    public void abrir(){
-        externalService.chamarServico("Abrir persiana sala estar",
-                "A persiana da sala de estar será aberta");
-        aberta = true;
-    }
+
 }
