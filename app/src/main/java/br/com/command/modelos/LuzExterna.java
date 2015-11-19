@@ -1,37 +1,69 @@
 package br.com.command.modelos;
 
-import br.com.command.util.ExternalService;
+import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
-public class LuzExterna {
-    private static LuzExterna instance;
-    private ExternalService externalService;
+public class LuzExterna extends Controlavel {
 
-    private boolean ligada;
-
-    private LuzExterna(){
-        externalService = ExternalService.getInstance();
-    }
-
-    public static LuzExterna getInstance(){
-        if (instance == null)
-            instance = new LuzExterna();
-        return instance;
-    }
-
-    public boolean isLigada() {
-        return ligada;
-    }
+    public final static int ID = 3;
 
     public void ligar(){
-        externalService.chamarServico("Ligar luz", "A luz será ligada");
-        ligada = true;
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar Luz Externa", "A luz externa será ligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setLuzExternaLigada(false);
+                } else {
+                    statusController.setLuzExternaLigada(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isLuzExternaLigada());
+            }
+        }.execute();
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar luz", "A luz será desligada");
-        ligada = false;
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar Luz Externa",
+                                "A luz externa da garagem não dá limites.");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setLuzExternaLigada(true);
+                } else {
+                    statusController.setLuzExternaLigada(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isLuzExternaLigada());
+            }
+        }.execute();
     }
 }

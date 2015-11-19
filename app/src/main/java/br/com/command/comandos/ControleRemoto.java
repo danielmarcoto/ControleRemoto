@@ -8,18 +8,16 @@ import br.com.command.interfaces.Command;
  */
 public class ControleRemoto {
 
-    private final int totalCommands = 2;
+    private final int totalCommands = 19;
 
     Command[] onCommands;
     Command[] offCommands;
     Command undoCommand;
-    String[] nomes;
 
     public ControleRemoto() {
 
         onCommands = new Command[totalCommands];
-        offCommands = new Command[7];
-        nomes = new String[totalCommands];
+        offCommands = new Command[totalCommands];
 
         Command noCommand = new NoCommand();
 
@@ -33,7 +31,6 @@ public class ControleRemoto {
     public void setCommand(int slot, Command onCommand, Command offCommand) {
         onCommands[slot] = onCommand;
         offCommands[slot] = offCommand;
-        //nomes[slot] = nome;
     }
 
     public void onButtonWasPushed(int slot) {
@@ -52,10 +49,6 @@ public class ControleRemoto {
 
     public Command getCommand(int slot) {
         return onCommands[slot];
-    }
-
-    public String getNome(int slot) {
-        return nomes[slot];
     }
 
 }

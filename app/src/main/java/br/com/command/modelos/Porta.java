@@ -1,66 +1,79 @@
 package br.com.command.modelos;
 
-import br.com.command.util.ExternalService;
+import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
-public class Porta {
+public class Porta extends Controlavel {
 
-    private static Porta instance;
-    private ExternalService externalService;
-
-    private boolean aberta;
-    private boolean trancada;
-
-    private Porta(){
-        externalService = ExternalService.getInstance();
-    }
-
-    public static Porta getInstance(){
-        if (instance == null)
-            instance = new Porta();
-
-        return instance;
-    }
-
-    public boolean isAberta() {
-        return aberta;
-    }
-
-    public boolean isTrancada() {
-        return trancada;
-    }
+    public static final int ID = 6;
 
     public void abrir(){
 
-        if (trancada)
-            destrancar();
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Abrir Porta", "A porta será aberta");
 
-        externalService.chamarServico("Abrir a porta", "A porta será aberta");
-        aberta = true;
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setPortaAberta(false);
+                } else {
+                    statusController.setPortaAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isPortaAberta());
+            }
+        }.execute();
     }
 
     public void fechar(){
-        externalService.chamarServico("Fechar a porta", "A porta será fecharda");
-        aberta = false;
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Fechar Porta", "A porta será fechada");
 
-        trancar();
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setPortaAberta(true);
+                } else {
+                    statusController.setPortaAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isPortaAberta());
+            }
+        }.execute();
     }
 
     public void trancar(){
 
-        if (aberta) return;
 
-        externalService.chamarServico("Trantar a porta", "A porta será trancada");
-        trancada = false;
     }
 
     public void destrancar(){
 
-        if (aberta) return;
 
-        externalService.chamarServico("Destrantar a porta", "A porta será destrancada");
-        trancada = true;
     }
 }

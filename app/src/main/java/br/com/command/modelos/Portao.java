@@ -1,72 +1,72 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
 import android.util.Log;
-
-import br.com.command.interfaces.ServiceStatus;
-import br.com.command.util.ExternalService;
 
 /**
  * Created by danielmarcoto on 16/11/15.
  */
-public class Portao {
+public class Portao extends Controlavel {
 
-    private boolean aberto;
-    private boolean erro;
-    private ExternalService externalService;
-    private static Portao instance;
+    public final static int ID = 2;
 
-    private Portao() {
-        externalService = ExternalService.getInstance();
+    public Portao(){
+        super();
     }
 
-    public static Portao getInstance() {
-        if (instance == null) {
-            instance = new Portao();
-        }
-        return instance;
-    }
+    public void abrir()  {
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Abrir Portão", "O portão será aberto");
 
-    public boolean isAberto() {
-        return aberto;
-    }
+                return response;
+            }
 
-    public void abrir() throws Exception {
-        try {
-            externalService.chamarServico(
-                    "Abrir Portão",
-                    "Abrir o portão da garagem",
-                    new ServiceStatus() {
-                        @Override
-                        public void callbackIfSuccess() {
-                            aberto = true;
-                        }
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
 
-                        @Override
-                        public void callbackIfFail() {
-                            aberto = false;
-                            Log.i("Teste", "Estou no callbackIfFail");
-                        }
-                    });
-        } catch (Throwable e) {
-            throw new Exception("Erro");
-        }
+                Log.i("Log", "Response: " + response);
 
+                if (response.startsWith("Erro")){
+                    statusController.setPortaoAberto(false);
+                } else {
+                    statusController.setPortaoAberto(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isPortaoAberto());
+            }
+        }.execute();
     }
 
     public void fechar() {
-        externalService.chamarServico(
-                "Fechar Portão",
-                "Fechar o portão da garagem",
-                new ServiceStatus() {
-                    @Override
-                    public void callbackIfSuccess() {
-                        aberto = false;
-                    }
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Fechar Portão", "O portão será fechado");
 
-                    @Override
-                    public void callbackIfFail() {
-                        aberto = true;
-                    }
-                });
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setPortaoAberto(true);
+                } else {
+                    statusController.setPortaoAberto(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isPortaoAberto());
+            }
+        }.execute();
     }
 }

@@ -10,31 +10,19 @@ import br.com.command.util.OnStatusChangeListener;
  * Created by danielmarcoto on 17/11/15.
  */
 public class Garagem {
-    //private static Garagem instance;
+
+    public final static int ID = 1;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
-    //private StatusController statusController;
-    /*
-    public OnStatusChangeListener getOnStatusChangeListener() {
-        return onStatusChangeListener;
-    }*/
+    private StatusController statusController;
+
+    public Garagem(){
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
+    }
 
     public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
         this.onStatusChangeListener = onStatusChangeListener;
-    }
-
-    private OnStatusChangeListener onStatusChangeListener;
-
-    public final static int ID = 1;
-
-    private boolean aberta = false;
-
-    public Garagem(ExternalService externalService) {
-        this.externalService = externalService;
-        //statusController = StatusController.getInstance();
-    }
-
-    public boolean isAberta() {
-        return aberta;
     }
 
     public void abrir(){
@@ -55,13 +43,13 @@ public class Garagem {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    aberta = false;
+                    statusController.setGaragemAberta(false);
                 } else {
-                    aberta = true;
+                    statusController.setGaragemAberta(true);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(aberta);
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
             }
         }.execute();
     }
@@ -84,13 +72,13 @@ public class Garagem {
                 Log.i("Log", "Response: " + response);
 
                 if (response.startsWith("Erro")){
-                    aberta = true;
+                    statusController.setGaragemAberta(true);
                 } else {
-                    aberta = false;
+                    statusController.setGaragemAberta(false);
                 }
 
                 if (onStatusChangeListener != null)
-                    onStatusChangeListener.onChange(aberta);
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
             }
         }.execute();
     }

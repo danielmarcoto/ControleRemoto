@@ -22,16 +22,6 @@ public class ExternalService {
     private static ExternalService instance;
     private boolean isConnected;
 
-    public Context getContext() {
-        return context;
-    }
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    private Context context;
-
     public static ExternalService getInstance() {
         if (instance == null)
             instance = new ExternalService();
@@ -49,22 +39,34 @@ public class ExternalService {
 
     public String callRemote(String comando, String mensagem){
 
-        String[] strings = {comando, mensagem};
-        //String urlStr = "http://10..196.27:8080/ws/services/control?C=" + comando + "&M=" + mensagem;
+        String comandoParam;
+        String mensagemParam;
+
+        try {
+            comandoParam = URLEncoder.encode(comando, "utf-8");
+            mensagemParam = URLEncoder.encode(mensagem, "utf-8");
+        }
+        catch (UnsupportedEncodingException ex){
+            ex.printStackTrace();
+            return "Erro: " + ex.getMessage();
+        }
+
+        String[] strings = {comandoParam, mensagemParam};
+        //String urlStr = "http://10.196.27:8080/ws/services/control?C=" + comando + "&M=" + mensagem;
 
         // Correto
         //String urlStr = "http://10.4.192.169/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
         // Incorreto
-        String urlStr = "http://100.4.192.169/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
+        //String urlStr = "http://100.4.192.169/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
 
-        //String urlStr = "http://192.168.0.128/~danielmarcoto/app-server/?C=teste&M=daniel";
+        String urlStr = "http://192.168.0.128/~danielmarcoto/app-server/?C=" + strings[0] + "&M=" + strings[1];
 
         Log.i("Log", urlStr);
 
         URL url;
         HttpURLConnection urlConnection;
         String remoteData;
-        InputStream in = null;
+        InputStream in;
 
         try {
 
@@ -84,6 +86,9 @@ public class ExternalService {
             in = urlConnection.getInputStream();
 
             remoteData = readIt(in, in.available());
+
+            Log.d("Log", "Command: "+ strings[0]);
+
             return remoteData;
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,10 +141,6 @@ public class ExternalService {
         }
 
         String[] parameters = { comandoParam, mensagemParam };
-
-        HttpRequestTask requestTask = new HttpRequestTask(serviceStatus, context);
-        requestTask.execute(parameters);
-
     }
 
     public String readIt(InputStream stream, int len) throws IOException {

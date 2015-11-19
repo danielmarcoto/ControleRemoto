@@ -1,40 +1,70 @@
 package br.com.command.modelos;
 
-import br.com.command.util.ExternalService;
+import android.os.AsyncTask;
+import android.util.Log;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
-public class LuzSuite {
-    private static LuzSuite instance;
+public class LuzSuite extends Controlavel {
 
-    private ExternalService externalService;
-
-    private boolean ligada;
-
-    private LuzSuite(){
-        externalService = ExternalService.getInstance();
-    }
-
-    public static LuzSuite getInstance(){
-        if (instance == null)
-            instance = new LuzSuite();
-        return instance;
-    }
-
-    public boolean isLigada() {
-        return ligada;
-    }
+    public final static int ID = 5;
 
     public void ligar(){
-        externalService.chamarServico("Ligar luz da suite",
-                "A luz da suite será ligada");
-        ligada = true;
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar Luz Suíte",
+                                "A luz da suíte será ligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setLuzSuiteLigada(false);
+                } else {
+                    statusController.setLuzSuiteLigada(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isLuzSuiteLigada());
+            }
+        }.execute();
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar a luz da suite",
-                "A luz da suite será desligada");
-        ligada = false;
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar Luz Suite",
+                                "A luz da suíte será desligada.");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setLuzSuiteLigada(true);
+                } else {
+                    statusController.setLuzSuiteLigada(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isLuzSuiteLigada());
+            }
+        }.execute();
     }
 }
