@@ -1,39 +1,87 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class ArCondicionadoSalaEstar {
-    private static ArCondicionadoSalaEstar instance;
+    public final static int ID = 12;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
+    private StatusController statusController;
 
-    private boolean ligado;
-
-    private ArCondicionadoSalaEstar(){
-        externalService = ExternalService.getInstance();
+    public ArCondicionadoSalaEstar() {
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
     }
 
-    public static ArCondicionadoSalaEstar getInstance(){
-        if (instance == null)
-            instance = new ArCondicionadoSalaEstar();
-        return instance;
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
-    public boolean isLigado(){
-        return ligado;
+    public void ligar() {
+
+        new AsyncTask<String, Integer, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar Ar-condicionado sala de estar",
+                                "O ar-condicionado da sala de estar será ligado");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")) {
+                    statusController.setGaragemAberta(false);
+                } else {
+                    statusController.setGaragemAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
-    public void ligar(){
-        externalService.chamarServico("Ligar Ar-condicionado sala de estar",
-                "O ar-condicionado da sala de estar será ligado");
-        ligado = true;
+    public void desligar() {
+
+        new AsyncTask<String, Integer, String>() {
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar Ar-condicionado sala de estar",
+                                "O ar-condicionado da sala de estar será desligado");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")) {
+                    statusController.setGaragemAberta(true);
+                } else {
+                    statusController.setGaragemAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
-    public void desligar(){
-        externalService.chamarServico("Desligar Ar-condicionado sala de estar",
-                "O ar-condicionado da sala de estar será desligado");
-        ligado = false;
-    }
 }

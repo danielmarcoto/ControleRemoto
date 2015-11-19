@@ -1,39 +1,86 @@
 package br.com.command.modelos;
 
+import android.os.AsyncTask;
+import android.util.Log;
+
 import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class TvSalaEstar {
-    private static TvSalaEstar instance;
+    public final static int ID = 14;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
+    private StatusController statusController;
 
-    private boolean ligado;
-
-    private TvSalaEstar(){
-        externalService = ExternalService.getInstance();
+    public TvSalaEstar(){
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
     }
 
-    public static TvSalaEstar getInstance(){
-        if (instance == null)
-            instance = new TvSalaEstar();
-        return instance;
-    }
-
-    public boolean isLigado(){
-        return ligado;
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
     public void ligar(){
-        externalService.chamarServico("Ligar Tv sala de estar",
-                "A Tv da sala de estar será ligada");
-        ligado = true;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar Tv sala de estar",
+                                "A Tv da sala de estar será ligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(false);
+                } else {
+                    statusController.setGaragemAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar som sala de estar",
-                "A Tv da sala de estar será desligada");
-        ligado = false;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar som sala de estar",
+                                "A Tv da sala de estar será desligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(true);
+                } else {
+                    statusController.setGaragemAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 }

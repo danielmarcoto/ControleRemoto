@@ -1,39 +1,86 @@
 package br.com.command.modelos;
 
-import br.com.command.util.ExternalService;
+import android.os.AsyncTask;
+import android.util.Log;
 
+import br.com.command.util.ExternalService;
+import br.com.command.util.OnStatusChangeListener;
 /**
  * Created by danielmarcoto on 17/11/15.
  */
 public class SomPiscina {
-    private static SomPiscina instance;
+    public final static int ID = 17;
+    private OnStatusChangeListener onStatusChangeListener;
     private ExternalService externalService;
+    private StatusController statusController;
 
-    private boolean ligado;
-
-    private SomPiscina(){
-        externalService = ExternalService.getInstance();
+    public SomPiscina(){
+        this.externalService = ExternalService.getInstance();
+        this.statusController = StatusController.getInstance();
     }
 
-    public static SomPiscina getInstance(){
-        if (instance == null)
-            instance = new SomPiscina();
-        return instance;
-    }
-
-    public boolean isLigado(){
-        return ligado;
+    public void setOnStatusChangeListener(OnStatusChangeListener onStatusChangeListener) {
+        this.onStatusChangeListener = onStatusChangeListener;
     }
 
     public void ligar(){
-        externalService.chamarServico("Ligar som da piscina",
-                "O micro system da piscina será ligada");
-        ligado = true;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Ligar som da piscina",
+                                "O micro system da piscina será ligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(false);
+                } else {
+                    statusController.setGaragemAberta(true);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
 
     public void desligar(){
-        externalService.chamarServico("Desligar som da piscina",
-                "O micro system da piscina será desligada");
-        ligado = false;
+
+        new AsyncTask<String, Integer, String>(){
+            @Override
+            protected String doInBackground(String... strings) {
+                String response = externalService
+                        .callRemote("Desligar som da piscina",
+                                "O micro system da piscina será desligada");
+
+                return response;
+            }
+
+            @Override
+            protected void onPostExecute(String response) {
+                super.onPostExecute(response);
+
+                Log.i("Log", "Response: " + response);
+
+                if (response.startsWith("Erro")){
+                    statusController.setGaragemAberta(true);
+                } else {
+                    statusController.setGaragemAberta(false);
+                }
+
+                if (onStatusChangeListener != null)
+                    onStatusChangeListener.onChange(statusController.isGaragemAberta());
+            }
+        }.execute();
     }
+
 }

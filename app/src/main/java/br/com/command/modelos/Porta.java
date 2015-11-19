@@ -67,13 +67,4 @@ public class Porta extends Controlavel {
         }.execute();
     }
 
-    public void trancar(){
-
-
-    }
-
-    public void destrancar(){
-
-
-    }
 }

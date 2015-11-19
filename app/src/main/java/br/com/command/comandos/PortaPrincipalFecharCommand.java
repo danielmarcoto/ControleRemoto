@@ -17,6 +17,5 @@ public class PortaPrincipalFecharCommand implements Command {
     @Override
     public void execute() {
             porta.fechar();
-            porta.trancar();
     }
 }

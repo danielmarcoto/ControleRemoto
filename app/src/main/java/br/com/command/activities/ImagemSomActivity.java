@@ -5,17 +5,34 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.ToggleButton;
 
-import br.com.command.comandos.SomCozinhaCommand;
-import br.com.command.comandos.SomPiscinaCommand;
-import br.com.command.comandos.SomSalaEstarCommand;
-import br.com.command.comandos.SomSuiteCommand;
-import br.com.command.comandos.TvSalaEstarCommand;
+import br.com.command.comandos.ControleRemoto;
+import br.com.command.comandos.GaragemAbrirCommand;
+import br.com.command.comandos.GaragemFecharCommand;
+import br.com.command.comandos.PortaPrincipalAbrirCommand;
+import br.com.command.comandos.PortaPrincipalFecharCommand;
+import br.com.command.comandos.PortaoAbrirCommand;
+import br.com.command.comandos.PortaoFecharCommand;
+import br.com.command.comandos.SomCozinhaDesligarCommand;
+import br.com.command.comandos.SomCozinhaLigarCommand;
+import br.com.command.comandos.SomPiscinaDesligarCommand;
+import br.com.command.comandos.SomPiscinaLigarCommand;
+import br.com.command.comandos.SomSalaEstarDesligarCommand;
+import br.com.command.comandos.SomSalaEstarLigarCommand;
+import br.com.command.comandos.SomSuiteDesligarCommand;
+import br.com.command.comandos.SomSuiteLigarCommand;
+import br.com.command.comandos.TvSalaEstarDesligarCommand;
+import br.com.command.comandos.TvSalaEstarLigarCommand;
 import br.com.command.interfaces.Command;
+import br.com.command.modelos.Garagem;
+import br.com.command.modelos.Porta;
+import br.com.command.modelos.Portao;
 import br.com.command.modelos.SomCozinha;
 import br.com.command.modelos.SomPiscina;
 import br.com.command.modelos.SomSalaEstar;
 import br.com.command.modelos.SomSuite;
+import br.com.command.modelos.StatusController;
 import br.com.command.modelos.TvSalaEstar;
+import br.com.command.util.OnStatusChangeListener;
 
 public class ImagemSomActivity extends AppCompatActivity {
 
@@ -32,17 +49,7 @@ public class ImagemSomActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        SomCozinha somCozinha = SomCozinha.getInstance();
-        SomSuite somSuite = SomSuite.getInstance();
-        SomPiscina somPiscina = SomPiscina.getInstance();
-        SomSalaEstar somSalaEstar = SomSalaEstar.getInstance();
-        TvSalaEstar tvSalaEstar = TvSalaEstar.getInstance();
-
-        Command somCozinhaCommand = new SomCozinhaCommand(somCozinha);
-        Command somSuiteCommand = new SomSuiteCommand(somSuite);
-        Command somPiscinaCommand = new SomPiscinaCommand(somPiscina);
-        Command somSalaEstarCommand = new SomSalaEstarCommand(somSalaEstar);
-        Command tvSalaEstarCommand = new TvSalaEstarCommand(tvSalaEstar);
+        StatusController statusController = StatusController.getInstance();
 
         toggleSomCozinha = (ToggleButton) findViewById(R.id.tgbMicroSystemCozinha);
         toggleSomSuite = (ToggleButton) findViewById(R.id.tgbMicroSystemSuite);
@@ -50,17 +57,80 @@ public class ImagemSomActivity extends AppCompatActivity {
         toggleSomSalaEstar = (ToggleButton) findViewById(R.id.tgbMicroSystemSalaEstar);
         toggleTvSalaEstar = (ToggleButton) findViewById(R.id.tgbTelevisorDaSalaDeEstar);
 
-        toggleSomCozinha.setChecked(somCozinha.isLigado());
-        toggleSomPiscina.setChecked(somPiscina.isLigado());
-        toggleSomSuite.setChecked(somSuite.isLigado());
-        toggleSomSalaEstar.setChecked(somSalaEstar.isLigado());
-        toggleTvSalaEstar.setChecked(tvSalaEstar.isLigado());
 
-        toggleSomSuite.setOnClickListener(new CommandOnClick(somSuiteCommand));
-        toggleSomCozinha.setOnClickListener(new CommandOnClick(somCozinhaCommand));
-        toggleSomPiscina.setOnClickListener(new CommandOnClick(somPiscinaCommand));
-        toggleSomSalaEstar.setOnClickListener(new CommandOnClick(somSalaEstarCommand));
-        toggleTvSalaEstar.setOnClickListener(new CommandOnClick(tvSalaEstarCommand));
+        SomCozinha somCozinha = new SomCozinha();
+        somCozinha.setOnStatusChangeListener(new OnStatusChangeListener() {
+            @Override
+            public void onChange(boolean newStatus) {
+                toggleSomCozinha.setChecked(newStatus);
+            }
+        });
+
+        SomSuite somSuite = new SomSuite();
+        somSuite.setOnStatusChangeListener(new OnStatusChangeListener() {
+            @Override
+            public void onChange(boolean newStatus) {
+                toggleSomSuite.setChecked(newStatus);
+            }
+        });
+
+        SomPiscina somPiscina = new SomPiscina();
+        somPiscina.setOnStatusChangeListener(new OnStatusChangeListener() {
+            @Override
+            public void onChange(boolean newStatus) {
+                toggleSomPiscina.setChecked(newStatus);
+            }
+        });
+        SomSalaEstar somSalaEstar = new SomSalaEstar();
+        somSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
+            @Override
+            public void onChange(boolean newStatus) {
+                toggleSomSalaEstar.setChecked(newStatus);
+            }
+        });
+        TvSalaEstar tvSalaEstar = new TvSalaEstar();
+        tvSalaEstar.setOnStatusChangeListener(new OnStatusChangeListener() {
+            @Override
+            public void onChange(boolean newStatus) {
+                toggleTvSalaEstar.setChecked(newStatus);
+            }
+        });
+
+
+        Command somCozinhaLigarCommand = new SomCozinhaLigarCommand(somCozinha);
+        Command somCozinhaDesligarCommand = new SomCozinhaDesligarCommand(somCozinha);
+
+        Command somPiscinaLigarCommand = new SomPiscinaLigarCommand(somPiscina);
+        Command somPiscinaDesligarCommand = new SomPiscinaDesligarCommand(somPiscina);
+
+        Command somSuiteLigarCommand = new SomSuiteLigarCommand(somSuite);
+        Command somSuiteDesligarCommand = new SomSuiteDesligarCommand(somSuite);
+
+        Command somSalaEstarLigarCommand = new SomSalaEstarLigarCommand(somSalaEstar);
+        Command somSalaEstarDesligarCommand = new SomSalaEstarDesligarCommand(somSalaEstar);
+
+        Command tvSalaEstarLigarCommand = new TvSalaEstarLigarCommand(tvSalaEstar);
+        Command tvSalaEstarDesligarCommand = new TvSalaEstarDesligarCommand(tvSalaEstar);
+
+
+        ControleRemoto controleRemoto = new ControleRemoto();
+        controleRemoto.setCommand(SomCozinha.ID, somCozinhaLigarCommand, somCozinhaDesligarCommand);
+        controleRemoto.setCommand(SomPiscina.ID, somPiscinaLigarCommand, somPiscinaDesligarCommand);
+        controleRemoto.setCommand(SomSalaEstar.ID, somSalaEstarLigarCommand, somSalaEstarDesligarCommand);
+        controleRemoto.setCommand(SomSuite.ID, somSuiteLigarCommand, somSuiteDesligarCommand);
+        controleRemoto.setCommand(TvSalaEstar.ID, tvSalaEstarLigarCommand, tvSalaEstarDesligarCommand);
+
+        toggleSomCozinha.setChecked(statusController.isSomCozinha());
+        toggleSomPiscina.setChecked(statusController.isSomPiscina());
+        toggleSomSuite.setChecked(statusController.isSomSuite());
+        toggleSomSalaEstar.setChecked(statusController.isSomSalaEstar());
+        toggleTvSalaEstar.setChecked(statusController.isTvSalaEstar());
+
+        toggleSomSuite.setOnClickListener(new CommandOnClick(SomCozinha.ID, controleRemoto));
+        toggleSomCozinha.setOnClickListener(new CommandOnClick(SomPiscina.ID, controleRemoto));
+        toggleSomPiscina.setOnClickListener(new CommandOnClick(SomSalaEstar.ID, controleRemoto));
+        toggleSomSalaEstar.setOnClickListener(new CommandOnClick(SomSuite.ID, controleRemoto));
+        toggleTvSalaEstar.setOnClickListener(new CommandOnClick(TvSalaEstar.ID, controleRemoto));
 
     }
 

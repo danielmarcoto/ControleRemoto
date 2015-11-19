@@ -31,6 +31,16 @@ public class StatusController {
     private boolean aquecedorSalaEstarLigado;
     private boolean aquecedorSuiteLigado;
 
+    private boolean arCondicionadoCorredorLigado;
+    private boolean arCondicionadoSalaEstarLigado;
+    private boolean arCondicionadoSuiteLigado;
+
+    private boolean somCozinha;
+    private boolean somPiscina;
+    private boolean somSalaEstar;
+    private boolean somSuite;
+    private boolean tvSalaEstar;
+
 
     public boolean isLuzExternaLigada() {
         return luzExternaLigada;
@@ -126,5 +136,69 @@ public class StatusController {
 
     public void setAquecedorSuiteLigado(boolean aquecedorSuiteLigado) {
         this.aquecedorSuiteLigado = aquecedorSuiteLigado;
+    }
+
+    public boolean isArCondicionadoSuiteLigado() {
+        return arCondicionadoSuiteLigado;
+    }
+
+    public void setArCondicionadoSuiteLigado(boolean arCondicionadoSuiteLigado) {
+        this.arCondicionadoSuiteLigado = arCondicionadoSuiteLigado;
+    }
+
+    public boolean isArCondicionadoCorredorLigado() {
+        return arCondicionadoCorredorLigado;
+    }
+
+    public void setArCondicionadoCorredorLigado(boolean arCondicionadoCorredorLigado) {
+        this.arCondicionadoCorredorLigado = arCondicionadoCorredorLigado;
+    }
+
+    public boolean isArCondicionadoSalaEstarLigado() {
+        return arCondicionadoSalaEstarLigado;
+    }
+
+    public void setArCondicionadoSalaEstarLigado(boolean arCondicionadoSalaEstarLigado) {
+        this.arCondicionadoSalaEstarLigado = arCondicionadoSalaEstarLigado;
+    }
+
+    public boolean isSomCozinha() {
+        return somCozinha;
+    }
+
+    public void setSomCozinha(boolean somCozinha) {
+        this.somCozinha = somCozinha;
+    }
+
+    public boolean isSomPiscina() {
+        return somPiscina;
+    }
+
+    public void setSomPiscina(boolean somPiscina) {
+        this.somPiscina = somPiscina;
+    }
+
+    public boolean isSomSalaEstar() {
+        return somSalaEstar;
+    }
+
+    public void setSomSalaEstar(boolean somSalaEstar) {
+        this.somSalaEstar = somSalaEstar;
+    }
+
+    public boolean isSomSuite() {
+        return somSuite;
+    }
+
+    public void setSomSuite(boolean somSuite) {
+        this.somSuite = somSuite;
+    }
+
+    public boolean isTvSalaEstar() {
+        return tvSalaEstar;
+    }
+
+    public void setTvSalaEstar(boolean tvSalaEstar) {
+        this.tvSalaEstar = tvSalaEstar;
     }
 }
